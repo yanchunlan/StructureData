@@ -49,9 +49,10 @@ public class TestList {
     }
 
 
-    // 二叉树
+
     public static void main(String[] args) {
-        BinaryTree.test();
+//        BinaryTree.test();  // 二叉树
+        Graph.test(); // 图
     }
 
 }
