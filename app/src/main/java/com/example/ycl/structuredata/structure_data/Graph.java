@@ -12,7 +12,7 @@ public class Graph {
     private int[] vertexs; // 顶点数组
     private int[][] matrix;
     private static final int MAX_WEIGHT = 1000;// 代表无穷大
-    private boolean [] isVisited; // 遍历的flag
+    private boolean[] isVisited; // 遍历的flag
 
 
     public Graph(int vertexSize) {
@@ -65,7 +65,8 @@ public class Graph {
 
     /**
      * 根据前一个邻接点的下标来取得下一个邻接点
-     * @param v 表示要找的顶点
+     *
+     * @param v     表示要找的顶点
      * @param index 表示该顶点相对于哪个邻接点去获取下一个邻接点
      * @return
      */
@@ -87,7 +88,7 @@ public class Graph {
         while (w != -1) {
             if (!isVisited[w]) { // 解决没有访问到的也需要再次遍历
                 // 需要遍历该顶点
-                System.out.println("访问到了："+w+" 顶点");
+                System.out.println("访问到了：" + w + " 顶点");
                 depthFirstSearch(w);
             }
             w = getNextNeighbor(i, w);
@@ -97,12 +98,12 @@ public class Graph {
     /**
      * 对外公开的深度优先遍历
      */
-    public void depthFirstSearch(){
+    public void depthFirstSearch() {
         isVisited = new boolean[vertexSize];
         // 这个循环是解决没有遍历完的也要被遍历
         for (int i = 0; i < vertexSize; i++) {
             if (!isVisited[i]) {
-                System.out.println("访问到了："+i+"顶点");
+                System.out.println("访问到了：" + i + "顶点");
                 depthFirstSearch(i);
             }
         }
@@ -111,7 +112,7 @@ public class Graph {
     /**
      * 对外公开的广度优先遍历
      */
-    public void broadFirstSearch(){
+    public void broadFirstSearch() {
         isVisited = new boolean[vertexSize];
         // 这个循环是解决没有遍历完的也要被遍历
         for (int i = 0; i < vertexSize; i++) {
@@ -127,15 +128,15 @@ public class Graph {
     private void broadFirstSearch(int i) {
         int u, w;
         LinkedList<Integer> queue = new LinkedList<>();
-        System.out.println("访问到了："+i+"顶点");
+        System.out.println("访问到了：" + i + "顶点");
         isVisited[i] = true;
         queue.add(i);//第一次把v0加到队列
         while (!queue.isEmpty()) {
-            u = (Integer)(queue.removeFirst()).intValue();
+            u = (Integer) (queue.removeFirst()).intValue();
             w = getFirstNeighbor(u);
             while (w != -1) {
                 if (!isVisited[w]) {
-                    System.out.println("访问到了："+w+"顶点");
+                    System.out.println("访问到了：" + w + "顶点");
                     isVisited[w] = true;
                     queue.add(w);
                 }
@@ -143,6 +144,40 @@ public class Graph {
             }
         }
     }
+
+    /**
+     * 普里姆算法
+     */
+    public void prim() {
+        int[] lowcost = new int[vertexSize];//最小代价顶点权值的数组,为0表示已经获取最小权值
+        int[] adjvex = new int[vertexSize];//放顶点权值
+        int min, minId, sum = 0;
+        for (int i = 1; i < vertexSize; i++) {
+            lowcost[i] = matrix[0][i];
+        }
+        for (int i = 1; i < vertexSize; i++) {
+            min = MAX_WEIGHT;
+            minId = 0;
+            for (int j = 1; j < vertexSize; j++) {
+                // 取出最小的且大于0的数
+                if (lowcost[j] < min && lowcost[j] > 0) {
+                    min = lowcost[j];
+                    minId = j;
+                }
+            }
+            System.out.println("顶点："+adjvex[minId]+"权值："+min);
+            sum += min;
+            lowcost[minId] = 0;
+            for (int j = 1; j < vertexSize; j++) {
+                if (lowcost[j] != 0 && matrix[minId][j] < lowcost[j]) {
+                    lowcost[j] = matrix[minId][j];
+                    adjvex[j] = minId;
+                }
+            }
+        }
+        System.out.println("最小生成树权值和:"+sum);
+    }
+
 
     // -----------------------------  遍历 end  ----------------------------
 
@@ -181,7 +216,8 @@ public class Graph {
 //        System.out.println("vo的出度:" + graph.getOutDegree(4));
 //        System.out.println("权值：" + graph.getWeight(2, 3));
 
-        graph.depthFirstSearch();
-        graph.broadFirstSearch();
+//        graph.depthFirstSearch();
+//        graph.broadFirstSearch();
+        graph.prim();
     }
 }

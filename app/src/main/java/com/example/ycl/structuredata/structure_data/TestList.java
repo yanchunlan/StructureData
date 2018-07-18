@@ -49,10 +49,13 @@ public class TestList {
     }
 
 
-
     public static void main(String[] args) {
-//        BinaryTree.test();  // 二叉树
-        Graph.test(); // 图
+        // 二叉树
+//        BinaryTree.test();
+
+        // 图
+//        Graph.test();
+        GraphKruskal.test();
     }
 
 }
