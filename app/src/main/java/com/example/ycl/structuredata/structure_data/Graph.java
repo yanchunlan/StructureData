@@ -1,5 +1,7 @@
 package com.example.ycl.structuredata.structure_data;
 
+import java.util.LinkedList;
+
 /**
  * author: ycl
  * date: 2018-07-18 0:52
@@ -10,6 +12,8 @@ public class Graph {
     private int[] vertexs; // 顶点数组
     private int[][] matrix;
     private static final int MAX_WEIGHT = 1000;// 代表无穷大
+    private boolean [] isVisited; // 遍历的flag
+
 
     public Graph(int vertexSize) {
         this.vertexSize = vertexSize;
@@ -18,6 +22,7 @@ public class Graph {
         for (int i = 0; i < vertexSize; i++) {
             vertexs[i] = i;
         }
+        isVisited = new boolean[vertexSize];
     }
 
     /**
@@ -33,6 +38,7 @@ public class Graph {
         return degree;
     }
 
+
     /**
      * 获取两个顶点之间的权值
      */
@@ -40,6 +46,105 @@ public class Graph {
         int weight = matrix[v1][v2];
         return weight == MAX_WEIGHT ? -1 : weight;
     }
+
+
+    // -----------------------------  遍历 start  ----------------------------
+    // 算法一般是递归
+
+    /**
+     * 获取第一个顶点的邻接点
+     */
+    public int getFirstNeighbor(int index) {
+        for (int i = 0; i < vertexSize; i++) {
+            if (matrix[index][i] != 0 && matrix[index][i] != MAX_WEIGHT) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 根据前一个邻接点的下标来取得下一个邻接点
+     * @param v 表示要找的顶点
+     * @param index 表示该顶点相对于哪个邻接点去获取下一个邻接点
+     * @return
+     */
+    public int getNextNeighbor(int v, int index) {
+        for (int i = index + 1; i < vertexSize; i++) {
+            if (matrix[v][i] != 0 && matrix[v][i] != MAX_WEIGHT) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 图的深度遍历算法
+     */
+    private void depthFirstSearch(int i) {
+        isVisited[i] = true;
+        int w = getFirstNeighbor(i);
+        while (w != -1) {
+            if (!isVisited[w]) { // 解决没有访问到的也需要再次遍历
+                // 需要遍历该顶点
+                System.out.println("访问到了："+w+" 顶点");
+                depthFirstSearch(w);
+            }
+            w = getNextNeighbor(i, w);
+        }
+    }
+
+    /**
+     * 对外公开的深度优先遍历
+     */
+    public void depthFirstSearch(){
+        isVisited = new boolean[vertexSize];
+        // 这个循环是解决没有遍历完的也要被遍历
+        for (int i = 0; i < vertexSize; i++) {
+            if (!isVisited[i]) {
+                System.out.println("访问到了："+i+"顶点");
+                depthFirstSearch(i);
+            }
+        }
+    }
+
+    /**
+     * 对外公开的广度优先遍历
+     */
+    public void broadFirstSearch(){
+        isVisited = new boolean[vertexSize];
+        // 这个循环是解决没有遍历完的也要被遍历
+        for (int i = 0; i < vertexSize; i++) {
+            if (!isVisited[i]) {
+                broadFirstSearch(i);
+            }
+        }
+    }
+
+    /**
+     * 图的广度优先遍历
+     */
+    private void broadFirstSearch(int i) {
+        int u, w;
+        LinkedList<Integer> queue = new LinkedList<>();
+        System.out.println("访问到了："+i+"顶点");
+        isVisited[i] = true;
+        queue.add(i);//第一次把v0加到队列
+        while (!queue.isEmpty()) {
+            u = (Integer)(queue.removeFirst()).intValue();
+            w = getFirstNeighbor(u);
+            while (w != -1) {
+                if (!isVisited[w]) {
+                    System.out.println("访问到了："+w+"顶点");
+                    isVisited[w] = true;
+                    queue.add(w);
+                }
+                w = getNextNeighbor(u, w);
+            }
+        }
+    }
+
+    // -----------------------------  遍历 end  ----------------------------
 
 
     public int[] getVertexs() {
@@ -73,7 +178,10 @@ public class Graph {
         graph.matrix[7] = a7;
         graph.matrix[8] = a8;
 
-        System.out.println("vo的出度:"+graph.getOutDegree(4));
-		System.out.println("权值："+graph.getWeight(2,3));
+//        System.out.println("vo的出度:" + graph.getOutDegree(4));
+//        System.out.println("权值：" + graph.getWeight(2, 3));
+
+        graph.depthFirstSearch();
+        graph.broadFirstSearch();
     }
 }
