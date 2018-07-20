@@ -1,4 +1,4 @@
-package com.example.ycl.structuredata.structure_data;
+package com.example.ycl.structuredata.structure_data.tree;
 
 import java.util.ArrayList;
 import java.util.Stack;

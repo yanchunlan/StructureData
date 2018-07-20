@@ -1,5 +1,7 @@
 package com.example.ycl.structuredata.structure_data;
 
+import com.example.ycl.structuredata.structure_data.graph.DnGraphTopologic;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -55,7 +57,9 @@ public class TestList {
 
         // 图
 //        Graph.test();
-        GraphKruskal.test();
+//        GraphKruskal.test();
+//        DnJavaDijstra.test();
+        DnGraphTopologic.test();
     }
 
 }

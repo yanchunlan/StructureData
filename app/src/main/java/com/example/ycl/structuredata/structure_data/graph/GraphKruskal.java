@@ -1,4 +1,4 @@
-package com.example.ycl.structuredata.structure_data;
+package com.example.ycl.structuredata.structure_data.graph;
 
 /**
  * author: ycl
@@ -25,7 +25,7 @@ public class GraphKruskal {
             m = find(parent, edges[i].end);
             if (n != m) {
                 parent[n] = m;
-                System.out.println("起始顶点：" + edges[i].begin + "---结束顶点：" + edges[i].end + "~权值：" + edges[i].weight);
+//                System.out.println("起始顶点：" + edges[i].begin + "---结束顶点：" + edges[i].end + "~权值：" + edges[i].weight);
                 sum += edges[i].weight;
             } else {
                 System.out.println("第" + i + "条边回环了");
