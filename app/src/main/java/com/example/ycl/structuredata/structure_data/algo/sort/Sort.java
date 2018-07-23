@@ -30,6 +30,7 @@ public class Sort {
 
 
 //     --------------------- 插入排序  start  ---------------------------
+
     /**
      * 直接插入排序
      */
@@ -85,9 +86,28 @@ public class Sort {
 
     /**
      * 希尔排序
+     * 不稳定 ； 颗粒越小，越接近冒泡排序，
+     * 比其他插入法更加有优越性
      */
-    private static int[] HeerSort(int[] array) {
-
+    private static int[] HillSort(int[] array) {
+        int length = array.length;
+        int d = length / 2;
+        int temp;
+        while (true) {
+            for (int i = 0; i < d; i++) {
+                for (int j = i; j + d <length; j+=d) {
+                    if (array[j] > array[j + d]) {
+                        temp = array[j];
+                        array[j] = array[j + d];
+                        array[j + d] = temp;
+                    }
+                }
+            }
+            if (d == 1) {
+                break;
+            }
+            d--;
+        }
 
         return array;
     }
@@ -114,17 +134,17 @@ public class Sort {
         printSort(array1, "交换之前：");
         array1 = insertSort(array1);
         printSort(array1, "交换后：");
-        */
+
 
         int[] array2 = {49, 38, 65, 97, 176, 213, 227, 49, 78, 34, 12, 164, 11, 18, 1};
         printSort(array2, "交换之前：");
         array2 = BinaryInsertSort(array2);
         printSort(array2, "交换后：");
-
+        */
 
         int[] array3 = {49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 1, 33, 85, 29};
         printSort(array3, "交换之前：");
-        array3 = HeerSort(array3);
+        array3 = HillSort(array3);
         printSort(array3, "交换后：");
     }
 
