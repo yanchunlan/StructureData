@@ -1,5 +1,6 @@
 package com.example.ycl.structuredata.structure_data;
 
+import com.example.ycl.structuredata.structure_data.algo.sort.Sort;
 import com.example.ycl.structuredata.structure_data.graph.DnGraphTopologic;
 
 import java.util.ArrayList;
@@ -59,7 +60,11 @@ public class TestList {
 //        Graph.test();
 //        GraphKruskal.test();
 //        DnJavaDijstra.test();
-        DnGraphTopologic.test();
+//        DnGraphTopologic.test();
+
+
+        // 排序
+        Sort.test();
     }
 
 }
