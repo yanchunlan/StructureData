@@ -1,7 +1,8 @@
 package com.example.ycl.structuredata.structure_data;
 
+import com.example.ycl.structuredata.structure_data.algo.sort.MergeSort;
+import com.example.ycl.structuredata.structure_data.algo.sort.QuickSort;
 import com.example.ycl.structuredata.structure_data.algo.sort.Sort;
-import com.example.ycl.structuredata.structure_data.graph.DnGraphTopologic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +65,9 @@ public class TestList {
 
 
         // 排序
-        Sort.test();
+//        Sort.test();
+        new QuickSort().test();
+        new MergeSort().test();
     }
 
 }
