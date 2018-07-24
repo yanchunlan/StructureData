@@ -175,6 +175,7 @@ public class Sort {
         for (int arr : array) {
             System.out.print(arr + " ");
         }
+//        System.out.print(Arrays.toString(array) + " ");
     }
 
     public static void test() {
