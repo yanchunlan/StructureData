@@ -3,7 +3,7 @@ package com.example.ycl.structuredata.structure_data.graph;
 /**
  * @Author: Ycl
  * @Date: 2018/7/19 16:33
- * @Desc: 图-最短路径
+ * @Desc: 图-最短路径-迪杰斯塔拉
  */
 public class DnJavaDijstra {
     private static final int MAXVEX = 9;

@@ -1,6 +1,6 @@
 package com.example.ycl.structuredata.structure_data;
 
-import com.example.ycl.structuredata.structure_data.algo.sort.BasicSort;
+import com.example.ycl.structuredata.structure_data.algo.sharewine.ShareWine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,7 +66,19 @@ public class TestList {
 //        Sort.test();
 //        new QuickSort().test();
 //        new MergeSort().test();
-        new BasicSort().test();
-    }
+//        new BasicSor().test();
+//        BinarySearch.test();
 
+
+        // 递归: 自己调用自己 ； 迭代：调用别人
+//        new HanNoTa().test(); // 汉诺塔
+//        new Gcd().test(); // 欧几里得
+//        new CalNFact().test(); // 阶乘
+
+
+        // 穷举：泊松分酒
+        new ShareWine().test(); // 阶乘
+
+
+    }
 }
