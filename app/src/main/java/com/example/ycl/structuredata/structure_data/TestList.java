@@ -1,6 +1,6 @@
 package com.example.ycl.structuredata.structure_data;
 
-import com.example.ycl.structuredata.structure_data.algo.sharewine.ShareWine;
+import com.example.ycl.structuredata.structure_data.algo.chess.ChessBoardProblem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +61,6 @@ public class TestList {
 //        DnJavaDijstra.test();
 //        DnGraphTopologic.test();
 
-
         // 排序
 //        Sort.test();
 //        new QuickSort().test();
@@ -69,16 +68,20 @@ public class TestList {
 //        new BasicSor().test();
 //        BinarySearch.test();
 
-
         // 递归: 自己调用自己 ； 迭代：调用别人
 //        new HanNoTa().test(); // 汉诺塔
 //        new Gcd().test(); // 欧几里得
 //        new CalNFact().test(); // 阶乘
 
-
         // 穷举：泊松分酒
-        new ShareWine().test(); // 阶乘
+//        new ShareWine().test(); // 阶乘
 
+        // 贪心算法
+//        new GreedyPackage().test(); // 背包装满问题
+
+        // 分治算法
+//        new SportsSchedule().test(); // 球队比赛安排问题
+        new ChessBoardProblem().test(); //
 
     }
 }
