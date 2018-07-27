@@ -1,4 +1,4 @@
-package com.example.ycl.structuredata.structure_data.algo.dispatch;
+package com.example.ycl.structuredata.structure_data.algo.sort2.dispatch;
 
 /**
  * @Author: Ycl

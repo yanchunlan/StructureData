@@ -1,4 +1,4 @@
-package com.example.ycl.structuredata.structure_data.algo.sharewine;
+package com.example.ycl.structuredata.structure_data.algo.sort1.sharewine;
 
 /**
  * @Author: Ycl

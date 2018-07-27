@@ -1,4 +1,4 @@
-package com.example.ycl.structuredata.structure_data.algo.recursion;
+package com.example.ycl.structuredata.structure_data.algo.sort1.recursion;
 
 /**
  * @Author: Ycl

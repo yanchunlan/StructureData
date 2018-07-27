@@ -1,4 +1,4 @@
-package com.example.ycl.structuredata.structure_data.algo.search;
+package com.example.ycl.structuredata.structure_data.algo.sort1.search;
 
 import com.example.ycl.structuredata.structure_data.algo.sort.BasicSort;
 import com.example.ycl.structuredata.structure_data.algo.sort.Sort;

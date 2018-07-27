@@ -1,6 +1,6 @@
 package com.example.ycl.structuredata.structure_data;
 
-import com.example.ycl.structuredata.structure_data.algo.chess.ChessBoardProblem;
+import com.example.ycl.structuredata.structure_data.algo.sort3.josephus.Josephus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +81,13 @@ public class TestList {
 
         // 分治算法
 //        new SportsSchedule().test(); // 球队比赛安排问题
-        new ChessBoardProblem().test(); //
+//        new ChessBoardProblem().test(); //棋盘覆盖
+
+        // 动态规划-回溯算法
+//        new LCS().test(); // 寻找相识字符
+//        new Queen().test(); // 棋盘行列不能相同，斜对角也不能相同
+        new Josephus().test(); // 约瑟夫杀人法
+//        BigCount  // 大数相乘
 
     }
 }

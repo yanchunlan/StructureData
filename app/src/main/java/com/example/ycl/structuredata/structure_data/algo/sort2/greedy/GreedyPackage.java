@@ -1,4 +1,4 @@
-package com.example.ycl.structuredata.structure_data.algo.greedy;
+package com.example.ycl.structuredata.structure_data.algo.sort2.greedy;
 
 import java.util.Arrays;
 
