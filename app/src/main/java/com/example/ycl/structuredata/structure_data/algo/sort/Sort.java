@@ -1,11 +1,33 @@
 package com.example.ycl.structuredata.structure_data.algo.sort;
 
+import java.util.Arrays;
+
 /**
  * @Author: Ycl
  * @Date: 2018/7/23 14:29
  * @Desc: 排序
  */
 public class Sort {
+
+    /**
+     * 冒泡排序
+     */
+    private static int[] bubbleSort(int[] array) {
+        // 每次排序把最大值排序到最后
+        int temp, length = array.length;
+        for (int i = 0; i < length - 1; i++) {
+            for (int j = 0; j < length - 1 - i; j++) {
+                if (array[j] > array[j + 1]) {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+        return array;
+    }
+
+
     /**
      * 选择排序
      */
@@ -85,7 +107,7 @@ public class Sort {
 
 
     /**
-     * 希尔排序
+     * 希尔排序 : 增量排序
      * 不稳定 ； 颗粒越小，越接近冒泡排序，
      * 比其他插入法更加有优越性
      */
