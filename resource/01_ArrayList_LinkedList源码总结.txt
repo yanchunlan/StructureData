@@ -1,0 +1,163 @@
+依据 API 28.0.0 分析
+一.  ArrayList:
+        类分析：
+            实现了 list,RandomAccess, Cloneable, java.io.Serializable,则可以随机送，克隆，序列化
+        但是 transient Object[] elementData，不序列化，是因为有扩容容量，在序列化的时候writeObject，将size和element写入ObjectOutputStream；
+        反序列化时调用readObject()，从ObjectInputStream获取size和element，再恢复到elementData
+
+	    初始化：
+            ArrayList(int initialCapacity)： initialCapacity>0,初始化指定数组，==0初始化空数组，<0 异常
+            ArrayList()：初始化{}空数组
+
+            注意：
+                记住初始化是不会扩容10容量数组的，实在第一次add的时候扩容的，只要是null数据，第一次添加就直接变为10了
+
+        add:
+            首先调用了ensureCapacityInternal(),参数是: size+1, 如果是空数组，再去取10与size+1最大值，否则直接去扩容计算
+
+            什么情况扩容：
+                扩容是当前size+1>数组大小,就代表容器满了，就需要扩容
+
+            扩容原理：
+                默认1.5倍扩容，（是根据原来真实数据扩容1.5倍的，不是size+1的1.5倍）
+                如果新容量小于计算值，就赋值计算值，再直接copy到数组中（像第一次扩容10容量数组就是）
+                如果新容量比最大值还要大，则将新容量赋值为VM要求最大值
+                否则直接赋值新容量大小到数组中
+
+            为什么size+1：
+                是因为后面扩容数组 0+0>>1还是0 ,如果是0的话，就没法扩容了
+
+        其他方法：
+            trimToSize()方法：调整数组大小为当前元素所占用的容量大小
+            clone()方法：克隆出一个新数组（Object的clone()方法来得到一个新的ArrayList对象，然后将elementData复制给该对象并返回）
+            add(int index, E element)方法：copy index后面的数组到扩容数组里面去，在把index数据赋值给数组，返回旧值
+            indexOf(Object o)方法：遍历查找数组的索引并返回
+            get(int index)方法：返回指定下标处的元素的值
+            remove(int index)方法：把index+1后面的数据赋值给index,并返回index数据，并且把size--数据置为null
+            越界检查：
+                add,index>size||index<0 就越界了，等于就会扩容（扩容只会存在add里面）
+                其他都是,index >= size就越界了，此处没有扩容操作
+
+         优缺点：
+               优点：
+                    1.因为其底层是数组，所以修改和查询效率高。
+                    2.可自动扩容(1.5倍)。
+               缺点：
+                    1.插入和删除效率不高。
+                    2.线程不安全。
+二.  LinkedList
+        类分析：
+            List<E>, Deque<E>, Cloneable, java.io.Serializable
+            双端链表的结构，有两个变量，first指向链表头部，last指向链表尾部
+        构造方法：
+            public LinkedList(): 构造空链表
+            public LinkedList(Collection<? extends E> c)：构造链表，并添加数据到集合中去
+                addAll:
+                    1. 检查index索引范围
+                    2. 得到集合数据
+                    3. 得到插入位置的前驱和后继节点
+                    4. 遍历数据，将数据插入到指定位置
+
+        ------------------------  add ----------------------
+        add:
+            执行linkLast()，链表尾部添加一个双端节点的操作，但是需要注意对链表为空时头节点的处理
+        add(int index,E e)：
+            index==size,执行linkLast，否则linkBefore,其中linkBefore执行node(index) 先查到index的节点（此处对半分，查到前端，或者后面）
+                1.  创建newNode节点，将newNode的后继指针指向succ，前驱指针指向pred
+                2. 将succ的前驱指针指向newNode
+                3. 根据pred是否为null，进行不同操作。
+                        - 如果pred为null，说明该节点插入在头节点之前，要重置first头节点
+                        - 如果pred不为null，那么直接将pred的后继指针指向newNode即可
+            总结：每次操作数据，都是新建newNode,创建前节点，再分别把原来的指定的节点，前后分别指向新节点即可，其中前节点==null要做区分
+        Deque接口的操作：
+            addFirst :调用linkFirst，添加到头部
+            addLast ：调用linkLast，添加到尾部
+            offer(E e)：调用了add
+            offerFirst： 调用了addFirst
+            offerLast： 调用了addLast
+        ------------------------  add ----------------------
+
+        ------------------------  检索 ----------------------
+        get(int index)：
+                checkElementIndex,node(index).item ： 检查边界之后直接2分半查找（注意不是2分查找）
+
+        获得位置为0的头节点数据：
+            getFirst，element 都是调用了getFirst，链表为空时，抛出NoSuchElementException
+            peek()和peekFirst()，当链表为空时，peek()和peekFirst()方法返回null
+
+        尾节点也是：
+            getLast()方法在链表为空时，会抛出NoSuchElementException，而peekLast()则不会，只是会返回null
+
+        查找：
+            indexOf，2分半，从前往后查找，
+            lastIndexOf，2分半，从后往前查找，
+
+            注意：
+                其中链表中大多数都是调用的indexOf，列入contains就是
+        ------------------------  检索 ----------------------
+
+        ------------------------  remove ----------------------
+        remove(Object o):
+            区分null,遍历删除,执行unlink，其中unlink：
+                    1.得到待删除节点的前驱节点和后继节点
+                    2.删除前驱节点（非null处理，并把删除节点的prev=null）
+                    3.删除后继节点 （非null处理，并把删除节点的next=null）
+                    4.当前item=null,并把size--,modCount++
+        remove(int index)：
+            执行了 unlink(node(index))操作，
+        删除头节点：
+            remove()、pop()、removeFirst()、poll()、pollFirst()：前三有异常（都是执行removeFirst），后面无异常，
+            且都执行unlinkFirst(f)
+        删除尾节点：
+            removeLast()和pollLast()：前抛出异常，后返回null,都执行unlinkLast
+        ------------------------  remove ----------------------
+
+        ------------------------  迭代器 ----------------------
+        iterator()——>listIterator(0)——>listIterator(int index)
+        ListItr implements ListIterator<E>{
+
+            private int expectedModCount = modCount;//保存当前modCount，确保fail-fast机制
+            // 迭代的时候，如果外部的modCount!=expectedModCount 就会抛出异常
+        }
+
+        在ListIterator的构造器中，得到了当前位置的节点，就是变量next。next()方法返回当前节点的值并将next指向其后继节点，
+        previous()方法返回当前节点的前一个节点的值并将next节点指向其前驱节点。由于Node是一个双端节点，所以这儿用了一个节点
+        就可以实现从前向后迭代和从后向前迭代。另外在ListIterator初始时，exceptedModCount保存了当前的modCount，如果在迭代
+        期间，有操作改变了链表的底层结构，那么再操作迭代器的方法时将会抛出ConcurrentModificationException
+        ------------------------  迭代器 ----------------------
+
+
+        优缺点：
+            优点：
+                适用于频繁增加、删除
+                由于LinkedList实现了Queue接口，所以LinkedList不止有队列的接口，还有栈的接口，可以使用LinkedList作为队列和栈的实现
+                （ LinkedList内部是将链表头部当做栈顶，链表尾部当做栈底，也就意味着所有的压入、摊入操作都在链表头部进行）
+            缺点：
+                线程不安全
+                修改和查询效率低
+
+            注意：不是线程安全的，如果想使LinkedList变成线程安全的 List list=Collections.synchronizedList(new LinkedList(...));
+
+面试常问：
+    linkedList:
+        1、增删改查
+
+        ● 链表批量增加，是靠for循环遍历原数组，依次执行插入节点操作。对比ArrayList是通过System.arraycopy完成批量增加的。增加一定会修改modCount。
+        ● 通过下标获取某个node 的时候，（add select），会根据index处于前半段还是后半段 进行一个折半，以提升查询效率
+        ● 删也一定会修改modCount。 按下标删，也是先根据index找到Node，然后去链表上unlink掉这个Node。 按元素删，会先去遍历链表寻找是否有该Node，如果有，去链表上unlink掉这个Node。
+        ● 改也是先根据index找到Node，然后替换值。改不修改modCount。
+        ● 查本身就是根据index找到Node。
+        ● 所以它的CRUD操作里，都涉及到根据index去找到Node的操作。
+
+        2、遗忘点
+
+        LinkedList最大的好处在于头尾和已知节点的插入和删除时间复杂度都是o(1)。但是涉及到先确定位置再操作的情况，则时间复杂度会变为o(n)。
+        当然，每个节点都需要保留prev和next指针也是经常被吐槽是浪费了空间。
+
+        3、offer与add的区别
+
+        offer属于 offer in interface Deque
+        add 属于 add in interface Collection。
+        当队列为空时候，使用add方法会报错，而offer方法会返回false。
+        作为List使用时,一般采用add / get方法来 压入/获取对象。
+        作为Queue使用时,才会采用 offer/poll/take等方法作为链表对象时,offer等方法相对来说没有什么意义这些方法是用于支持队列应用的。
