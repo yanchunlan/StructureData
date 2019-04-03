@@ -1,0 +1,45 @@
+HashMap
+	
+	数组+单链表存储数据=散列链表
+	
+	put：
+	
+		查看图3_put流程
+		
+		默认值16个
+		key.getHashCode,作为数组的key值，放入node对象
+		
+		列如：第一个键值对A进来。通过计算其key的hash得到的index=0。记做:Entry[0] = A。 
+			第二个键值对B，通过计算其index也等于0， HashMap会将B.next =A,Entry[0] =B
+		
+		流程：
+			①.判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容； 
+			②.根据键值key计算hash值得到插入的数组索引i，如果table[i]==null，直接新建节点添加，转向⑥，如果table[i]不为空，转向③； 
+			③.判断table[i]的首个元素是否和key一样，如果相同直接覆盖value，否则转向④，这里的相同指的是hashCode以及equals； 
+			④.判断table[i] 是否为treeNode，即table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对，否则转向⑤； 
+			⑤.遍历table[i]，判断链表长度是否大于8，大于8的话把链表转换为红黑树，在红黑树中执行插入操作，否则进行链表的
+			插入操作；遍历过程中若发现key已经存在直接覆盖value即可； 
+			⑥.插入成功后，判断实际存在的键值对数量size是否超多了最大容量threshold，如果超过，进行扩容。
+	
+	get:
+	
+		1、指定key 通过hash函数得到key的hash值 
+		int hash=key.hashCode();
+
+		2、调用内部方法 getNode()，得到桶号(一般都为hash值对桶数求模) 
+		int index =hash%Entry[].length;
+
+		3、比较桶的内部元素是否与key相等，若都不相等，则没有找到。相等，则取出相等记录的value。
+
+		4、如果得到 key 所在的桶的头结点恰好是红黑树节点，就调用红黑树节点的 getTreeNode() 方法，否则就遍历链表节点。getTreeNode 
+		方法使通过调用树形节点的 find()方法进行查找。由于之前添加时已经保证这个树是有序的，因此查找时基本就是折半查找，效率很高。
+
+		5、如果对比节点的哈希值和要查找的哈希值相等，就会判断 key 是否相等，相等就直接返回；不相等就从子树中递归查找
+		
+		
+	碰撞的减少：
+		选择合适的equals,hashCode,能够减少碰撞的发生，列如使用String，Integer的wrapper类作为键即可
+	
+	扩容：
+		大小超过负载因子0.75之后，即75%，就会创建hashMap2倍的数组，并将原对象放入新数组中，这个过程叫做
+		rehashing

@@ -1,0 +1,21 @@
+一.	stack
+	限定仅在表尾进行插入和删除操作的线性表
+	
+	Stack<E> extends Vector
+	
+		push：
+			vector.addElement,与ArrayList一致，一个数组，扩容机制，最大是10
+		pop：
+			执行peek,获取最后一个值并，弹出最后一个
+			vector.removeElementAt, 直接数组减少即可
+		peek:
+			直接返回最后一个值，会抛异常
+		
+		search：
+			vector.lastIndexOf,与arrayList一致，遍历（对非空判断区分开）
+			
+二.	deque
+	允许在一端进行插入操作、而在另一端进行删除操作的线性表
+	
+	interface Deque<E> extends Queue<E>
+	都是接口，其子类实现，列如：LinkedList就是继承了队列的方式，所以具体可查看linkedList源码
