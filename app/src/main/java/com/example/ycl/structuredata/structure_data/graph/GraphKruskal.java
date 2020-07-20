@@ -3,7 +3,7 @@ package com.example.ycl.structuredata.structure_data.graph;
 /**
  * author: ycl
  * date: 2018-07-18 23:22
- * desc: 图 - 克鲁斯卡尔算法
+ * desc: 图 - 克鲁斯卡尔算法 查找最小生成树
  */
 public class GraphKruskal {
     private Edge[] edges;
