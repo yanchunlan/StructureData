@@ -38,10 +38,9 @@
 	贪心算法，分治算法（球队划分，棋盘覆盖）
 	回溯算法：寻找相似字符，棋盘排列，约瑟夫杀人法，大数相乘
 
-7.  算法练习 - 高频面试系列 fucking-algorithm[](https://github.com/labuladong/fucking-algorithm)
+7.  算法练习 - 高频面试系列 [fucking-algorithm](https://github.com/labuladong/fucking-algorithm)
 
-
-    如何实现LRU算法
+	如何实现LRU算法
     如何高效寻找素数
     如何计算编辑距离
     如何运用二分查找算法
