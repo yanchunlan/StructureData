@@ -8,6 +8,7 @@
 /build
 /captures
 .externalNativeBuild
+*.cxx
 ### Android template
 # Built application files
 *.apk
