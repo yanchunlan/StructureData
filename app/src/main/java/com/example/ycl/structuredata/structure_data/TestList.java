@@ -155,7 +155,7 @@ public class TestList {
 //        hashMap();
 
         // 二叉树
-        BinaryTree.test();
+//        BinaryTree.test();
 
         // 图
 //        Graph.test();
@@ -167,7 +167,7 @@ public class TestList {
 //        Sort.test();
 //        new QuickSort().test();
 //        new MergeSort().test();
-//        new BasicSor().test();
+//        new BasicSort().test();
 //        BinarySearch.test();
 
         // 递归: 自己调用自己 ； 迭代：调用别人

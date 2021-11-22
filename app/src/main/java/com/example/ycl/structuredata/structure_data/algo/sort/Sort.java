@@ -11,8 +11,12 @@ public class Sort {
 
     /**
      * 冒泡排序
+     * 时间复杂度 n2,空间复杂度n,稳定
      */
     private static int[] bubbleSort(int[] array) {
+        if (array == null || array.length < 2) {
+            return null;
+        }
         // 每次排序把最大值排序到最后
         int temp, length = array.length;
         for (int i = 0; i < length - 1; i++) {
@@ -30,6 +34,7 @@ public class Sort {
 
     /**
      * 选择排序
+     * 时间复杂度 n2,空间复杂度n,不稳定
      */
     private static int[] selectSort(int[] array) {
         // 选择排序的优化 ，以前是直接在for里面直接替换值，现在是for里面找到最小值的下标，再替换

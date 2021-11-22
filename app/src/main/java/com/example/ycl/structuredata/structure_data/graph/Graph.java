@@ -247,11 +247,14 @@ public class Graph {
         graph.matrix[7] = a7;
         graph.matrix[8] = a8;
 
-//        System.out.println("vo的出度:" + graph.getOutDegree(4));
-//        System.out.println("权值：" + graph.getWeight(2, 3));
+        System.out.println("vo的出度:" + graph.getOutDegree(4));
+        System.out.println("权值：" + graph.getWeight(2, 3));
 
-//        graph.depthFirstSearch();
-//        graph.broadFirstSearch();
+        // 遍历
+        graph.depthFirstSearch();
+        graph.broadFirstSearch();
+
+        // 最小生成树 - 普里姆算法
         graph.prim();
     }
 

@@ -1,33 +1,34 @@
 # StructureData
 数据结构与算法
 
-1.线性表
+1.[线性表](./resource/day01-线性表)
 
 	顺序存储方式：ArrayList
 	链式存储方式：LinkedList
-2.栈和队列
+2.[栈和队列](./resource/day02-栈和队列)
 
 	栈：Vector ,Stack  先进后出，先进后出，插入删除都是栈顶操作
 		案列： 波兰表达式：中缀->后缀表达式
 	队列：Queue , LinkedList 双向链式存储结构
-3.HashMap与LinkedHashMap
+3.[HashMap与LinkedHashMap](./resource/day03-HashMap和LinkedHashMap)
 
 	区别在于：linkedHashMap内部维护了一个双向链表
-4.树
+4.[树](./resource/day04-树)
 
+    满二叉树，完全二叉树
 	二叉树遍历：
 	前序遍历：根->左->右
 	中序遍历：左—>根->右
 	后序遍历：左—>右->根
 		赫夫曼树原理
 	二叉树的put，delete操作
-5.图
+5.[图](./resource/day06-图)
 
 	图的出度入读，广度遍历、深度遍历
 	图的最小生成树、普利姆算法，克鲁斯卡尔算法
 	图的最短路径、迪杰斯特拉算法
 	拓扑排序
-6.算法
+6.[算法](./resource/day09-算法简介)
 
 	排序：选择排序
 		直接插入排序，二分法排序，希尔排序，堆排序

@@ -5,7 +5,7 @@ import java.util.Stack;
 /**
  * @Author: Ycl
  * @Date: 2018/7/20 14:32
- * @Desc: top排序
+ * @Desc: 拓扑排序
  */
 public class DnGraphTopologic {
     private int numVertexes;

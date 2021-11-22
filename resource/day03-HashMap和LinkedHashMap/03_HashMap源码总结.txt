@@ -9,8 +9,8 @@ HashMap
 		默认值16个
 		key.getHashCode,作为数组的key值，放入node对象
 		
-		列如：第一个键值对A进来。通过计算其key的hash得到的index=0。记做:Entry[0] = A。 
-			第二个键值对B，通过计算其index也等于0， HashMap会将B.next =A,Entry[0] =B
+		列如：第一个键值对A进来。通过计算其key的hash得到的index=0。记做:Entry[0&(length-1)] = A。
+			第二个键值对B，通过计算其index也等于0， HashMap会将B.next =A,Entry[0&(length-1)] =B
 		
 		流程：
 			①.判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容； 
