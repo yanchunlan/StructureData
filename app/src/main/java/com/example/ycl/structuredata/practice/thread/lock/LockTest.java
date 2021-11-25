@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * date:  2021/11/11 22:28
  * desc:
  */
-public class Test {
+public class LockTest {
 
   public static void main(String[] args) {
     final Stock stock = new Stock();

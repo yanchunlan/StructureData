@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * date:  2021/11/11 23:41
  * desc:
  */
-public class Test {
+public class BlockTest {
   public static void main(String[] args) {
     final Stock stock = new Stock();
     Thread p1 = new Thread(new Runnable() {

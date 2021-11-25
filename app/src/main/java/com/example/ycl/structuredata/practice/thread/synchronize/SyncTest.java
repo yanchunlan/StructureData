@@ -5,7 +5,7 @@ package com.example.ycl.structuredata.practice.thread.synchronize;
  * date:  2021/11/11 21:59
  * desc:
  */
-public class Test {
+public class SyncTest {
 
   public static void main(String[] args) {
     final Stock stock = new Stock();

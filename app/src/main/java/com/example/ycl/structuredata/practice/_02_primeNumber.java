@@ -11,8 +11,7 @@ import java.util.Arrays;
  */
 class _02_primeNumber {
     public static void main(String[] args) {
-
-
+        countPrimes(5);
     }
 
     // [2,n) 内的素数

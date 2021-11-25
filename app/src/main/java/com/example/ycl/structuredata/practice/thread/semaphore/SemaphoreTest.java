@@ -9,7 +9,7 @@ import java.util.concurrent.Semaphore;
  * date:  2021/11/11 23:18
  * desc:
  */
-public class Test {
+public class SemaphoreTest {
 
   public static void main(String[] args) {
     final Stock stock = new Stock();
@@ -55,11 +55,11 @@ public class Test {
 
   static class Stock {
     List<String> stock = new LinkedList();
-    private Semaphore semaphore = new Semaphore(1);
+    private java.util.concurrent.Semaphore semaphore = new java.util.concurrent.Semaphore(1);
 
     // 消费与生产互斥条件，消费需要等待生产成功之后才行
-    private Semaphore produceCount = new Semaphore(3);
-    private Semaphore consumerCount = new Semaphore(0);
+    private java.util.concurrent.Semaphore produceCount = new java.util.concurrent.Semaphore(3);
+    private java.util.concurrent.Semaphore consumerCount = new java.util.concurrent.Semaphore(0);
 
     public void put(String computer) {
       try {
