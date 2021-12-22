@@ -31,6 +31,40 @@ public class Sort {
         return array;
     }
 
+    /**
+     * 冒泡排序 - 优化版
+     * 1. 通过flag标识，如果内层循环没有交换，说明已经排序ok,不需要再排序了
+     * 2. 记录最后一次交换的下标，i+1次循环只需要遍历到此坐标即可
+     * 时间复杂度 n2,空间复杂度n,稳定
+     */
+    private static int[] bubbleSortPref(int[] array) {
+        if (array == null || array.length < 2) {
+            return null;
+        }
+        // 每次排序把最大值排序到最后
+        int temp, length = array.length;
+        boolean hasSwap = false; // 判断是否交换
+        int lastSwapPosition = 0;// 记录最后一次交换的位置
+        int lenj = length-1;
+        for (int i = 0; i < length - 1; i++) {
+            hasSwap = false;
+            for (int j = 0; j < lenj; j++) {
+                if (array[j] > array[j + 1]) {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    hasSwap = true;
+                    lastSwapPosition = j;
+                }
+            }
+            lenj = lastSwapPosition;
+            if (!hasSwap) {
+                break;
+            }
+        }
+        return array;
+    }
+
 
     /**
      * 选择排序
