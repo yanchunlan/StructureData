@@ -2,6 +2,7 @@ package com.example.ycl.structuredata.practice;
 
 import com.example.ycl.structuredata.practice.calculate.Calculate1;
 import com.example.ycl.structuredata.practice.calculate.Calculate2;
+import com.example.ycl.structuredata.practice.calculate.Calculate3;
 import com.example.ycl.structuredata.practice.calculate.Link1;
 import com.example.ycl.structuredata.practice.calculate.Sort1;
 import com.example.ycl.structuredata.practice.calculate.Sort2;
@@ -38,5 +39,6 @@ public class _05_Calculate {
         // 10个糖分给3个人
         Calculate2.main(args);
         // 54张牌抽5张组成顺子
+        Calculate3.main(args);
     }
 }
